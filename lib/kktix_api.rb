@@ -1,9 +1,9 @@
+# frozen_string_literal: true
 require 'yaml'
 require 'http'
 
 module KKTIX
   class KKTIXApi
-
     def get_org_acts(oid)
       kktix_response = {}
       org_response = HTTP.get("http://#{oid}.kktix.cc/events.json")
