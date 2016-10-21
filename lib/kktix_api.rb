@@ -5,7 +5,7 @@ require 'http'
 module KktixEvent
   # Service for retriving KKTIX events
   class KktixApi
-    def events(oid: nil)
+    def events(oid = nil)
       response = HTTP.get(events_json_uri(oid: oid)).parse
       return response['entry'] if response.key?('entry')
       []

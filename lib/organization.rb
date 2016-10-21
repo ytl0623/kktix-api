@@ -13,7 +13,7 @@ module KktixEvent
 
     def events
       return @events if @events
-      events_hash = @kktix_api.events(oid: @oid)
+      events_hash = @kktix_api.events(@oid)
       return if events_hash.nil?
       @events = events_hash
     end

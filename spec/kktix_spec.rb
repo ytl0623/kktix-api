@@ -9,9 +9,7 @@ describe 'KKTIX API spec' do
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
-
     @kktix_api = KktixEvent::KktixApi.new
-    @organization = KktixEvent::Organization.new(@kktix_api, TEST_ORG_ID)
   end
 
   after do
@@ -31,7 +29,7 @@ describe 'KKTIX API spec' do
   end
 
   it 'should be able to return an empty array if the org does not exist' do
-    @kktix_api.events(oid: 'notexist').empty?
+    @kktix_api.events('notexist').empty?
   end
 end
 
@@ -43,7 +41,6 @@ describe 'KKTIX API spec' do
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
-
     @kktix_api = KktixEvent::KktixApi.new
     @organization = KktixEvent::Organization.new(@kktix_api, TEST_ORG_ID)
   end
