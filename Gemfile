@@ -9,3 +9,5 @@ gem 'webmock'
 
 gem 'flog'
 gem 'rubocop'
+
+gem 'simplecov'
