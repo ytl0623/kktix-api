@@ -29,6 +29,10 @@ describe 'KKTIX API spec' do
   it 'should be able to get events information throuh api' do
     @kktix_api.events.wont_be_empty
   end
+
+  it 'should be able to return an empty array if the org does not exist' do
+    @kktix_api.events(oid: 'notexist').empty?
+  end
 end
 
 describe 'KKTIX API spec' do
