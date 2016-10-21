@@ -5,6 +5,6 @@ require 'vcr'
 require 'webmock'
 require_relative '../lib/organization.rb'
 
-FIXTURES_FOLDER = 'spec/fixtures'
+FIXTURES_FOLDER = 'fixtures'
 CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
 CASSETTE_FILE = 'kktix_api'
