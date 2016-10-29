@@ -19,10 +19,12 @@ module KktixEvent
     private
 
     def update_info(entry, oid)
-      author = entry.first['author']
-      @oid = oid
-      @name = author['name']
-      @uri = author['uri']
+      unless oid.nil?
+        author = entry.first['author']
+        @oid = oid
+        @name = author['name']
+        @uri = author['uri']
+      end
       @events = entry.map do |event_data|
         KktixEvent::Event.new(event_data)
       end
