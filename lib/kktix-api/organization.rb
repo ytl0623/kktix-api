@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 require_relative 'kktix_api'
+require_relative 'feed'
 
 module KktixEvent
   # Single organization on KKTIX
   class Organization
-    attr_reader :oid
+    attr_reader :oid, :title, :updated, :feed
 
-    def initialize(kktix_api, oid)
-      @kktix_api = kktix_api
-      @oid = oid
+    def initialize(oid)
+      organization_data = KktixEvent::KktixApi.events(oid)
+      @title = organization_data['title']
+      @updated = organization_data['updated']
+      @feed = KktixEvent::Feed.new(feed_data: organization_data['entry'])
     end
 
-    def events
-      return @events if @events
-      events_hash = @kktix_api.events(@oid)
-      return if events_hash.nil?
-      @events = events_hash
-    end
+    # def events
+    #   return @events if @events
+    #   return if events_hash.nil?
+    #   @events = events_hash
+    # end
 
     def name
       update_info if @name.nil?
@@ -31,7 +33,7 @@ module KktixEvent
     private
 
     def update_info
-      author = events.first['author']
+      author = organization_data['entry'].first['author']
       @name = author['name']
       @uri = author['uri']
     end
