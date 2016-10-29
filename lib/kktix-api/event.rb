@@ -6,9 +6,11 @@ module KktixEvent
   class Event
     attr_reader :url, :published, :title, :summary, :content, :author
 
-    def initialize(data: nil)
-      load_data(data)
+    def initialize(event_data)
+      load_data(event_data)
     end
+
+    private
 
     def load_data(event_data)
       @url = event_data['url']
