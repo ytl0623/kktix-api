@@ -7,8 +7,8 @@ require 'minitest/rg'
 require 'yaml'
 require 'vcr'
 require 'webmock'
-require_relative '../lib/organization.rb'
-require_relative '../lib/kktix_api.rb'
+
+require_relative '../lib/kktix_api'
 
 FIXTURES_FOLDER = 'spec/fixtures'
 CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"

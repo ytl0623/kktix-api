@@ -9,27 +9,18 @@ describe 'KKTIX API spec' do
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
-    @kktix_api = KktixEvent::KktixApi.new
   end
 
   after do
     VCR.eject_cassette
   end
 
-  it 'should be able to get title throuh api' do
-    @kktix_api.title.length.must_be :>, 0
-  end
-
-  it 'should be able to get last updated time throuh api' do
-    @kktix_api.updated.length.must_be :>, 0
-  end
-
   it 'should be able to get events information throuh api' do
-    @kktix_api.events.wont_be_empty
+    KktixEvent::KktixApi.events.wont_be_empty
   end
 
   it 'should be able to return an empty array if the org does not exist' do
-    @kktix_api.events('notexist').empty?
+    KktixEvent::KktixApi.events('notexist').empty?
   end
 end
 
@@ -41,8 +32,7 @@ describe 'KKTIX API spec' do
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
-    @kktix_api = KktixEvent::KktixApi.new
-    @organization = KktixEvent::Organization.new(@kktix_api, TEST_ORG_ID)
+    @organization = KktixEvent::Organization.find(TEST_ORG_ID)
   end
 
   after do
