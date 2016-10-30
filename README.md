@@ -1,6 +1,7 @@
 # kktix_api Gem
 
 [![Build Status](https://travis-ci.org/twentyfour7/kktix-api.svg?branch=master)](https://travis-ci.org/twentyfour7/kktix-api)
+[![Gem Version](https://badge.fury.io/rb/kktix_api.svg)](https://badge.fury.io/rb/kktix_api)
 
 kktix_api is a gem that gets event information of an organization from KKTIX
 
