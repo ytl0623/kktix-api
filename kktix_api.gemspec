@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop', '~> 0.42'
 
   s.homepage    =  'https://github.com/twentyfour7/kktix-api'
-  s.license     =  'Apache-2.0'
+  s.license     =  'MIT'
 end
