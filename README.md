@@ -1,9 +1,9 @@
-# kktix_api Gem
+# KKTIX API Gem
 
-[![Build Status](https://travis-ci.org/twentyfour7/kktix-api.svg?branch=master)](https://travis-ci.org/twentyfour7/kktix-api)
 [![Gem Version](https://badge.fury.io/rb/kktix_api.svg)](https://badge.fury.io/rb/kktix_api)
+[![Build Status](https://travis-ci.org/twentyfour7/kktix-api.svg?branch=master)](https://travis-ci.org/twentyfour7/kktix-api)
 
-kktix_api is a gem that gets event information of an organization from KKTIX
+kktix_api is a gem that gets event information of an organization from [KKTIX](https://kktix.com)
 
 ## Installation
 
@@ -11,18 +11,48 @@ If you are working on a project, add this to your Gemfile: `gem 'kktix_api'`
 
 For ad hoc installation from command line:
 
-```$ gem install kktix_api```
+```console
+$ gem install kktix_api
+```
 
 
 ## Usage
 
-Require kktix_api gem in your code: `require 'kktix_api'`
+Execute `kktix` of an organization with specific `organization_id`; Otherwise, get latest published events.
+```console
+$ kktix [org_id]
+```
 
+### API
+
+Require kktix_api gem in your code:
+
+```ruby
+require 'kktix_api'
+```
+
+Get information using domain class `Organization`, you can get attributes like `name`, `uri`, and all the `events` held by the organization.
+
+```ruby
+organization = KktixEvent::Organization.find('<organization_id>')
+```
+
+
+List events information from an `Organization`, including `url`, `published`, `title`,  `summary`, `content`, and `author`.
+
+```ruby
+organization.events.each do |event|
+  puts "#{event.title} (#{event.published})"
+  puts event.url
+  puts event.content
+  puts
+end
+```
 
 See the following example code for more usage details:
 
 ```ruby
-oid = '<your organization id>'
+oid = 'nthuion'
 
 acts = KktixEvent::KktixApi.events(oid)
 puts acts
