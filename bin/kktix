@@ -3,20 +3,16 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'kktix_api'
 
-org_slug = ARGV[0] || ENV['KKTIX_ORGANIZATION_SLUG']
-# unless org_slug
-#   puts 'USAGE: kktix [org_slug]'
-#   exit(1)
-# end
-
-organization = KktixEvent::Organization.find(org_slug)
-
-unless organization.name.nil?
-  puts organization.name
-  puts '-' * organization.name.length
+keyword = ARGV[0]
+unless keyword
+  puts 'USAGE: kktix [keyword]'
+  exit(1)
 end
 
-organization.events.first(3).each.with_index(1) do |event, index|
+puts "Search for #{keyword}..."
+events = KktixEvent::Event.search(keyword)
+
+events.first(10).each.with_index(1) do |event, index|
   print "#{index}: "
   puts "#{event.title} (#{event.author[:name]})"
   puts event.summary
