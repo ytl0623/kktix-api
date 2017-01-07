@@ -4,6 +4,7 @@ require 'http'
 require 'open-uri'
 require 'nokogiri'
 require 'uri'
+require 'date'
 
 module KktixEvent
   # Service for retriving KKTIX events
@@ -14,8 +15,9 @@ module KktixEvent
       []
     end
 
-    def self.search(query)
-      uri = URI.escape("https://kktix.com/events?search=#{query}")
+    def self.search(query, start_at: Date.today)
+      start_at = start_at.to_s
+      uri = URI.escape("https://kktix.com/events?start_at=#{start_at}search=#{query}")
       doc = Nokogiri::HTML(open(uri))
       parse_search_result(doc)
     end
