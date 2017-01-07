@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.executables << 'kktix'
 
   s.add_runtime_dependency 'http', '~> 2.0'
+  s.add_runtime_dependency 'nokogiri', '~> 1.7'
 
   s.add_development_dependency 'minitest', '~> 5.9'
   s.add_development_dependency 'minitest-rg', '~> 5.2'

@@ -3,13 +3,13 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'kktix_api'
 
-org_id = ARGV[0] || ENV['KKTIX_ORGANIZATION_ID']
-# unless org_id
-#   puts 'USAGE: kktix [org_id]'
+org_slug = ARGV[0] || ENV['KKTIX_ORGANIZATION_SLUG']
+# unless org_slug
+#   puts 'USAGE: kktix [org_slug]'
 #   exit(1)
 # end
 
-organization = KktixEvent::Organization.find(org_id)
+organization = KktixEvent::Organization.find(org_slug)
 
 unless organization.name.nil?
   puts organization.name
@@ -18,7 +18,8 @@ end
 
 organization.events.first(3).each.with_index(1) do |event, index|
   print "#{index}: "
-  puts "#{event.title} (#{event.published})"
-  puts event.summary ? event.summary : event.content
+  puts "#{event.title} (#{event.author[:name]})"
+  puts event.summary
+  puts event.content
   puts
 end
