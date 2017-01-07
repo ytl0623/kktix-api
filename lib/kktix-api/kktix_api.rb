@@ -9,9 +9,9 @@ require 'date'
 module KktixEvent
   # Service for retriving KKTIX events
   class KktixApi
-    def self.events(oid = nil)
-      response = HTTP.get(events_json_uri(oid: oid)).parse
-      return response['entry'] if response.key?('entry')
+    def self.events(slug: nil)
+      response = HTTP.get(events_json_uri(slug: slug)).parse
+      return hash_s_to_sym(response['entry']) if response.key?('entry')
       []
     end
 
@@ -22,12 +22,22 @@ module KktixEvent
       parse_search_result(doc)
     end
 
-    def self.events_json_uri(oid: nil)
-      return 'https://kktix.com/events.json' if oid.nil?
-      "http://#{oid}.kktix.cc/events.json"
+    def self.events_json_uri(slug: nil)
+      return 'https://kktix.com/events.json' if slug.nil?
+      "http://#{slug}.kktix.cc/events.json"
     end
 
     private_class_method
+
+    def self.hash_s_to_sym(obj)
+      return obj.map { |hash| hash_s_to_sym(hash) } if obj.class == Array
+      obj.each_with_object({}) do |(k, v), memo|
+        # if v.class == Array
+        v = hash_s_to_sym(v) if v.class == Hash
+        memo[k.to_sym] = v
+        memo
+      end
+    end
 
     def self.parse_search_result(doc)
       events = doc.css('ul.event-list > li').map do |node|
