@@ -14,6 +14,6 @@ FIXTURES_FOLDER = 'spec/fixtures'
 CASSETTES_FOLDER = "#{FIXTURES_FOLDER}/cassettes"
 CASSETTE_FILE = 'kktix_api'
 
-TEST_ORG_ID = 'nthuion'
+TEST_ORG_SLUG = 'nthuion'
 # KKTIX_RESPONSE = YAML.load(File.read('spec/fixtures/kktix_response.yml'))
 # TEST_ORG_INFO = YAML.load(File.read('spec/fixtures/nthuion_info.yml'))

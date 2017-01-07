@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 require 'rake/testtask'
 
-task default: :spec
+task :default do
+  puts `rake -T`
+end
 
-# desc 'Run specs'
-# Rake::TestTask.new(name=:spec) do |t|
-#   t.pattern = 'spec/*_spec.rb'
-# end
-
-desc 'run tests'
-task :spec do
-  sh 'ruby spec/kktix_spec.rb'
+desc 'run specs'
+Rake::TestTask.new(:spec) do |t|
+  t.pattern = 'spec/*_spec.rb'
+  t.warning = false
 end
 
 desc 'delete cassette fixtures'
