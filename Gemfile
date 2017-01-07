@@ -2,6 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'http'
+gem 'nokogiri'
 
 gem 'minitest'
 gem 'minitest-rg'
